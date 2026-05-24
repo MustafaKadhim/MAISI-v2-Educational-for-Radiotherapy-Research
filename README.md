@@ -321,7 +321,7 @@ See [docs/limitations.md](docs/limitations.md) for the full list.
 
 ```bibtex
 @software{maisi_rt_sandbox,
-  author = {Kazim, Musti},
+  author = {Kadhim, Musti},
   title  = {MAISI-RT Sandbox},
   year   = {2026},
   url    = {https://github.com/mustikazim/maisi-rt-sandbox},
