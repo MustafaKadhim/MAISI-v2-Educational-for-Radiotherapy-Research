@@ -1,0 +1,32 @@
+# MAISI 2 recipe 05 - general MR image-only, T1 breast example
+
+nvidia:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-mr"
+  network: "rflow"
+  modality: "mri_t1"
+  intensity_mode: "mr"
+  output_dir: "outputs/maisi2_mr_breast_t1"
+  # Approximate breast FOV: 174 x 200 x 200 mm while staying in a compact
+  # 256 x 256 x 128 starter volume.
+  output_size: [256, 256, 128]
+  spacing: [0.68, 0.78, 1.56]
+  seeds: [53001]
+  gpu_index: 1
+  num_inference_steps: 30
+  cfg_guidance_scale: 15
+  output_prefix: "rflow_mr_breast_t1"
+  download_models: false
+
+sample_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overview_contact_sheet: true
+
+# Run:
+#   source MAISI_venv/bin/activate
+#   python scripts/run_nvidia_case_from_config.py --config configs/maisi2/05_mr_breast_t1.yaml

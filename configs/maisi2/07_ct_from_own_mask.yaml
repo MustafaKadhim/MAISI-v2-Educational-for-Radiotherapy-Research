@@ -1,0 +1,37 @@
+# MAISI 2 recipe 07 - CT image from your own MAISI label mask
+#
+# This uses NVIDIA's official `scripts.infer_image_from_mask` path. The input
+# mask must be a NIfTI label map in the MAISI 132-class vocabulary and include
+# the body envelope label 200.
+
+ct_from_mask:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-ct"
+  network: "rflow"
+  output_dir: "outputs/maisi2_ct_from_own_mask"
+  gpu_index: 1
+
+  # Change this before running.
+  mask_path: "path/to/your_maisi_132_label_mask_with_body200.nii.gz"
+  seeds: [61001]
+
+  modality: 1
+  num_inference_steps: 30
+  cfg_guidance_scale: 0
+  autoencoder_sliding_window_infer_size: [48, 48, 48]
+  autoencoder_sliding_window_infer_overlap: 0.6666
+  download_models: false
+
+ct_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overlay_mask: true
+  overview_contact_sheet: true
+
+# Run after setting mask_path:
+#   source MAISI_venv/bin/activate
+#   python scripts/run_nvidia_ct_from_mask_config.py --config configs/maisi2/07_ct_from_own_mask.yaml

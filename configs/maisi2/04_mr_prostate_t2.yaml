@@ -1,0 +1,34 @@
+# MAISI 2 recipe 04 - general MR image-only, T2 prostate example
+#
+# Uses NVIDIA's `rflow-mr` model. NVIDIA recommends `rflow-mr-brain` for brain
+# MRI and `rflow-mr` for other MRI anatomies such as prostate, breast, abdomen.
+
+nvidia:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-mr"
+  network: "rflow"
+  modality: "mri_t2"
+  intensity_mode: "mr"
+  output_dir: "outputs/maisi2_mr_prostate_t2"
+  # Approximate prostate FOV: 170 x 170 x 90 mm.
+  output_size: [256, 256, 128]
+  spacing: [0.66, 0.66, 0.70]
+  seeds: [52001]
+  gpu_index: 1
+  num_inference_steps: 30
+  cfg_guidance_scale: 15
+  output_prefix: "rflow_mr_prostate_t2"
+  download_models: false
+
+sample_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overview_contact_sheet: true
+
+# Run:
+#   source MAISI_venv/bin/activate
+#   python scripts/run_nvidia_case_from_config.py --config configs/maisi2/04_mr_prostate_t2.yaml

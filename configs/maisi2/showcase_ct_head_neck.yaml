@@ -1,0 +1,41 @@
+# Showcase CT recipe - head/neck and upper spine
+
+ct_structures:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-ct"
+  network: "rflow"
+  output_dir: "outputs/maisi2_showcase_ct_head_neck"
+  gpu_index: 1
+
+  seeds: [74001]
+  num_output_samples: 1
+  output_size: [256, 256, 128]
+  spacing: [1.0, 1.0, 2.0]
+
+  body_region: ["head"]
+  anatomy_list:
+    - "brain"
+    - "skull"
+    - "spinal cord"
+    - "thyroid gland"
+    - "trachea"
+    - "left common carotid artery"
+    - "right common carotid artery"
+  controllable_anatomy_size: []
+  modality: 1
+  num_inference_steps: 30
+  mask_generation_num_inference_steps: 1000
+  cfg_guidance_scale: 0
+  autoencoder_sliding_window_infer_size: [48, 48, 48]
+  autoencoder_sliding_window_infer_overlap: 0.6666
+  download_models: false
+
+ct_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overlay_structures: true
+  overview_contact_sheet: true

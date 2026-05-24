@@ -1,0 +1,33 @@
+# MAISI 2 recipe 03 - CT image-only generation
+#
+# Generates synthetic CT images without paired masks using NVIDIA's official
+# `rflow-ct` image-only diffusion path.
+
+nvidia:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-ct"
+  network: "rflow"
+  modality: "ct"
+  intensity_mode: "ct"
+  output_dir: "outputs/maisi2_ct_image_only"
+  output_size: [256, 256, 128]
+  spacing: [1.5, 1.5, 2.0]
+  seeds: [41001]
+  gpu_index: 1
+  num_inference_steps: 30
+  cfg_guidance_scale: 0
+  output_prefix: "rflow_ct_image_only"
+  download_models: false
+
+sample_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overview_contact_sheet: true
+
+# Run:
+#   source MAISI_venv/bin/activate
+#   python scripts/run_nvidia_case_from_config.py --config configs/maisi2/03_ct_image_only.yaml

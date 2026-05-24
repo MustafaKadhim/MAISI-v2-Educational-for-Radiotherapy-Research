@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package and dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run ruff linter
+        run: ruff check src/ tests/ scripts/
+
+      - name: Run ruff formatter check
+        run: ruff format --check src/ tests/ scripts/
+
+      - name: Run pytest
+        run: pytest --tb=short -v
+
+      - name: Run toy example script
+        run: python scripts/run_example_case.py --out /tmp/ci_toy_case
+
+      - name: Check toy case outputs exist
+        run: |
+          test -f /tmp/ci_toy_case/image.nii.gz
+          test -f /tmp/ci_toy_case/mask.nii.gz
+          test -f /tmp/ci_toy_case/qa_report.json
+          test -f /tmp/ci_toy_case/qa_report.md
+          test -f /tmp/ci_toy_case/mapped_labels.json
+          test -f /tmp/ci_toy_case/screenshots/three_plane_panel.png
+          test -f /tmp/ci_toy_case/slicer_loading_guide.md
+          echo "All expected outputs present."

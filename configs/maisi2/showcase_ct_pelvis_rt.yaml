@@ -1,0 +1,43 @@
+# Showcase CT recipe - pelvis / prostate radiotherapy teaching case
+
+ct_structures:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-ct"
+  network: "rflow"
+  output_dir: "outputs/maisi2_showcase_ct_pelvis_rt"
+  gpu_index: 1
+
+  seeds: [73001]
+  num_output_samples: 1
+  output_size: [256, 256, 128]
+  spacing: [1.5, 1.5, 2.0]
+
+  body_region: ["pelvis"]
+  anatomy_list:
+    - "prostate"
+    - "bladder"
+    - "left femur"
+    - "right femur"
+    - "left hip"
+    - "right hip"
+    - "sacrum"
+    - "colon"
+    - "small bowel"
+  controllable_anatomy_size: []
+  modality: 1
+  num_inference_steps: 30
+  mask_generation_num_inference_steps: 1000
+  cfg_guidance_scale: 0
+  autoencoder_sliding_window_infer_size: [48, 48, 48]
+  autoencoder_sliding_window_infer_overlap: 0.6666
+  download_models: false
+
+ct_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overlay_structures: true
+  overview_contact_sheet: true

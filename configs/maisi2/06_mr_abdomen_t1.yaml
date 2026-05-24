@@ -1,0 +1,31 @@
+# MAISI 2 recipe 06 - general MR image-only, T1 abdomen example
+
+nvidia:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-mr"
+  network: "rflow"
+  modality: "mri_t1"
+  intensity_mode: "mr"
+  output_dir: "outputs/maisi2_mr_abdomen_t1"
+  # Approximate abdomen FOV: 380 x 309 x 288 mm.
+  output_size: [256, 256, 128]
+  spacing: [1.48, 1.21, 2.25]
+  seeds: [54001]
+  gpu_index: 1
+  num_inference_steps: 30
+  cfg_guidance_scale: 15
+  output_prefix: "rflow_mr_abdomen_t1"
+  download_models: false
+
+sample_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overview_contact_sheet: true
+
+# Run:
+#   source MAISI_venv/bin/activate
+#   python scripts/run_nvidia_case_from_config.py --config configs/maisi2/06_mr_abdomen_t1.yaml

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Local environments
+MAISI_venv/
+.venv/
+venv/
+
+# NVIDIA upstream downloads and generated working data
+external/NV-Generate-CTMR/models/
+external/NV-Generate-CTMR/temp_work_dir/
+external/NV-Generate-CTMR/output*/
+external/NV-Generate-CTMR/embeddings/
+external/NV-Generate-CTMR/datasets/
+external/NV-Generate-CTMR/data/*.nii*
+
+# Large generated experiment outputs.
+outputs/maisi2_*/
+outputs/**/raw/
+outputs/dicom_export/
+
+# Logs
+*.log

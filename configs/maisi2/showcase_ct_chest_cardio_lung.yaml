@@ -1,0 +1,42 @@
+# Showcase CT recipe - chest, lungs, heart, and tumor
+
+ct_structures:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-ct"
+  network: "rflow"
+  output_dir: "outputs/maisi2_showcase_ct_chest_cardio_lung"
+  gpu_index: 1
+
+  seeds: [71001]
+  num_output_samples: 1
+  output_size: [256, 256, 128]
+  spacing: [1.5, 1.5, 2.0]
+
+  body_region: ["chest"]
+  anatomy_list:
+    - "lung tumor"
+    - "heart"
+    - "left lung upper lobe"
+    - "left lung lower lobe"
+    - "right lung upper lobe"
+    - "right lung middle lobe"
+    - "right lung lower lobe"
+    - "trachea"
+  controllable_anatomy_size: []
+  modality: 1
+  num_inference_steps: 30
+  mask_generation_num_inference_steps: 1000
+  cfg_guidance_scale: 0
+  autoencoder_sliding_window_infer_size: [48, 48, 48]
+  autoencoder_sliding_window_infer_overlap: 0.6666
+  download_models: false
+
+ct_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overlay_structures: true
+  overview_contact_sheet: true

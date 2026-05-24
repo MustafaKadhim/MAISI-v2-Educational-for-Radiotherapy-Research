@@ -1,0 +1,44 @@
+# MAISI 2 recipe 01 - MR brain, all released rflow-mr-brain contrasts
+#
+# Generates image-only brain MRI volumes using NVIDIA's official
+# NV-Generate-CTMR `rflow-mr-brain` path. This recipe covers whole-brain and
+# skull-stripped T1w, T2w, FLAIR, and SWI.
+#
+# Start small for public demos: keep one seed and one or two modalities first.
+
+nvidia:
+  repo_path: "external/NV-Generate-CTMR"
+  model_variant: "rflow-mr-brain"
+  network: "rflow"
+  output_dir: "outputs/maisi2_mr_brain_all_contrasts"
+  output_size: [256, 256, 256]
+  spacing: [1.0, 1.0, 1.0]
+  seeds: [20260522]
+  gpu_index: 1
+  num_inference_steps: 30
+  cfg_guidance_scale: 10
+  output_prefix: "rflow_mr_brain_{modality}"
+  download_models: false
+
+  modalities:
+    - "mri_t1"
+    - "mri_t2"
+    - "mri_flair"
+    - "mri_swi"
+    - "mri_t1_skull_stripped"
+    - "mri_t2_skull_stripped"
+    - "mri_flair_skull_stripped"
+    - "mri_swi_skull_stripped"
+
+sample_visuals:
+  output_subdir: "visuals"
+  planes: ["axial", "coronal", "sagittal"]
+  random_grid: true
+  random_slices: 16
+  orthogonal_panel: true
+  plane_sweeps: true
+  overview_contact_sheet: true
+
+# Run:
+#   source MAISI_venv/bin/activate
+#   python scripts/run_nvidia_case_from_config.py --config configs/maisi2/01_mr_brain_all_contrasts.yaml
