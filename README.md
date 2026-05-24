@@ -2,7 +2,6 @@
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
-[![Code style: Weekend vibes](https://img.shields.io/badge/code%20style-ruff-black)](https://github.com/astral-sh/ruff)
 
 **A low-barrier framework for generating synthetic CT and MRI volumes with NVIDIA MAISI — built for learners, researchers, and AI developers who want labeled medical imaging data without a clinical dataset.**
 
